@@ -12,8 +12,8 @@ from logic import play
 
 
 if __name__ == '__main__':
-    #Printing Board
-    
+   
+ 
     board = make_empty_board()
     print("               ")
     DisplayBoard(board)

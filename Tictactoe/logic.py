@@ -76,7 +76,7 @@ def check_winner(board,P):
             print("conditon 4 satisfied")
             break     
 
-    return Win # FIXME
+    return Win 
 
 
 
