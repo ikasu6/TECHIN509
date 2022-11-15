@@ -1,94 +1,112 @@
 # This file contains the Command Line Interface (CLI) for
 # the Tic-Tac-Toe game. This is where input and output happens.
 # For core game logic, see logic.py.
+import time
+from termcolor import colored, cprint
+from logic import make_empty_board, DisplayBoard, check_winner,play,P1vsP2,P1vsBot
 
-from logic import make_empty_board
-from logic import DisplayBoard
-from logic import check_winner
-from logic import play
 
+class player1:
+    
+    def __init__(self, P1: str, Mode: int)-> None:
+        self.Mode=Mode
+        self.P1 = P1
+        self.assign()
+            
+        
+    def assign(self):
+        self.Title='Player1'
+        #print(self.Mode,self.P1,self.Title)
+        return (self.P1,self.Mode,self.Title)
+    
+    
+class player2:
+    
+    def __init__(self, P1: str, Mode: int)-> None:
+        self.Mode=Mode
+        self.P1 = P1
+        self.assign()
+            
+        
+    def assign(self):
+        #print(self.Mode)
+
+        #print("Check")
+
+
+        if self.Mode==1:
+            cprint("Single Player Game",'red')
+            cprint("Player1 Vs Bot",'cyan')
+
+            self.Title= "Bot"
+            if self.P1=='X':
+                    self.P2 ='O'
+                    print("Player1:  ",self.P1 )
+                    print("Bot:      ",self.P2 )
+            elif self.P1=='O' :
+                    self.P2='X'
+                    print("Player1:  ",self.P1 ) 
+                    print("Bot:      ",self.P2 )
+                    print(self.Mode,self.P2,self.Title)
+                
+        if self.Mode==2:
+            cprint("Double Player Game",'red')
+            cprint("Player1 Vs Player2",'cyan')
+            self.Title= "Player2"
+            if self.P1=='X':
+                self.P2='O'
+                print("Player1:  ",self.P1 )
+                print("Player2:  ",self.P2 )
+            elif self.P1=='O' :
+                self.P2='X'
+                print("Player1:  ",self.P1 ) 
+                print("Player2:  ",self.P2 )
+                
+        return (self.P2,self.Mode,self.Title) 
+            
+    
+    
+    
+    
+
+        
 
 
 
 
 if __name__ == '__main__':
-   
- 
+    
+    GameName= "**********TicTacToe Game***********"
+    cprint(GameName, "green")
+    time.sleep(1)
     board = make_empty_board()
     print("               ")
     DisplayBoard(board)
     print("               ")
 
-
     #getting input
-    P1=input("Player1 select your symbol X or O: ")
-    
-    if  P1== 'X' or P1== 'O':
-        #print("Player1:  ",P1)
-        pass
-    else:
-        P1=input("Please Enter X or O:  ")    
-    
-    while P1 !='X' and P1 !='O':
-        P1=input("Please Enter X or O:  ")  
+    Mode=0
+    P1='N'
+    while Mode!=1 and Mode!=2:
+        cprint("Press 1 for Single player mode","yellow")
+        cprint("Press 2 for Double player mode","yellow")
+        Mode= int(input("Enter: "))
 
-    if P1=='X':
-        P2='O'
-        print("Player1:  ",P1 )
-        print("Player2:  ",P2 )
-    elif P1=='O' :
-        P2='X'
-        print("Player1:  ",P1 ) 
-        print("Player2:  ",P2 )   
-    
+    while P1 != 'O' and P1 !='X':
+        P1=input("Player1 select your symbol X or O: ")
+        P1=P1.upper()
 
 
+    Player1=player1(P1,Mode)
+    Player2=player2(Player1.P1,Player1.Mode)
+    #print("this Player2 P2",Player2.P2)
+    P2=Player2.P2
+    #############################
     
- 
-    winner = None
-    count=1
-    while winner == None and count<=9:
-        try:
-            pos1=int(input("player 1 enter Position:   "))
-        except ValueError:
-            print("Please input integer")   
-            pos1=int(input("player 1 enter Position:   ")) 
-        while pos1 not in board[0] and pos1 not in board[1] and pos1 not in board[2]:
-            pos1=int(input("Position not available player 1 enter Position on board  "))
-        play(board,pos1,P1)
-        count=count+1
-        #print("this is count",count)
-        #play(pos1,P1)
-        #count=count+1
-        #print("this is count",count)
-        win=check_winner(board,P1)
-        if win == P1:
-            print("Player1 '" +P1 +"' wins yayy")
-            winner=P1
-            break
-        
-        try:
-            pos2=int(input("player 2 enter Position:   "))
-        except ValueError:
-            print("Please input integer")   
-            pos2=int(input("player 2 enter Position:   "))     
-        while pos2 not in board[0] and pos2 not in board[1] and pos2 not in board[2]:
-            pos2=int(input("Position not available player 2 enter Position on board  "))
-        
-        play(board, pos2,P2)
-        count=count+1
-        win=check_winner(board,P2)
-        if win == P2:
-            print("Player2 '" +P2 +"' wins yayy")
-            winner=P2
-            break
-        #print("this is count",count) 
-        
-    if winner == None:
-        print("No winner draw")
-
-        # TODO: Show the board to the user. done
-        # TODO: Input a move from the player.
-        # TODO: Update the board.
-        # TODO: Update who's turn it is.
-        #winner = 'X'  # FIXME
+if Mode==1:
+    winner=P1vsBot(board,P1, P2)
+    print(winner)
+    pass
+if Mode==2:
+    winner=P1vsP2(board,P1, P2)
+    print(winner)
