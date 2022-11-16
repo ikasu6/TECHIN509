@@ -97,21 +97,22 @@ def P1vsP2(board,P1, P2) :
         except ValueError:
             print("Please input integer")   
             pos1=int(input("player 1 enter Position:   ")) 
+
         while pos1 not in li_pos:
             pos1=int(input("Position not available player 1 enter Position on board  "))
 
-    
-
-        i = li_pos.index(pos1)
-        del li_pos[i]
-        if len(li_pos)==0:
-            no_pos=1
-            break
+        
+        
 
         #print(li_pos)
         #########    
         play(board,pos1,P1)
         count=count+1
+        i = li_pos.index(pos1)
+        del li_pos[i]
+        if len(li_pos)==0:
+            no_pos=1
+            break
 
         win=check_winner(board,P1)
         if win == P1:
@@ -127,14 +128,15 @@ def P1vsP2(board,P1, P2) :
         while pos2 not in li_pos:
             pos2=int(input("Position not available player 2 enter Position on board  "))
 
+        
+        #print(li_pos)
+        #########  
+        play(board, pos2,P2)
         i = li_pos.index(pos2)
         del li_pos[i]
         if len(li_pos)==0:
             no_pos=1
             break
-        #print(li_pos)
-        #########  
-        play(board, pos2,P2)
 
         count=count+1
         win=check_winner(board,P2)
@@ -172,16 +174,17 @@ def P1vsBot(board,P1, P2) :
         while pos1 not in li_pos:
             pos1=int(input("Position not available player 1 enter Position on board  "))
 
-        i = li_pos.index(pos1)
-        del li_pos[i]
-        if len(li_pos)==0:
-            no_pos=1
-            break
+    
 
         #print(li_pos)
         #########    
         play(board,pos1,P1)
         count=count+1
+        i = li_pos.index(pos1)
+        del li_pos[i]
+        if len(li_pos)==0:
+            no_pos=1
+            break
 
         win=check_winner(board,P1)
         if win == P1:
@@ -197,14 +200,15 @@ def P1vsBot(board,P1, P2) :
         print("Bot's choice of position is :    " + str(pos2))
         time.sleep(1) 
 
+
+        #print(li_pos)
+        #########  
+        play(board, pos2,P2)
         i = li_pos.index(pos2)
         del li_pos[i]
         if len(li_pos)==0:
             no_pos=1
             break
-        #print(li_pos)
-        #########  
-        play(board, pos2,P2)
 
         count=count+1
         win=check_winner(board,P2)
@@ -224,7 +228,8 @@ def P1vsBot(board,P1, P2) :
 #board=make_empty_board()
 #win=P1vsBot(board,'X','O')
 
-
+board=[['O','O','O'], ['X','5','O'], ['X','O','9']]
+play(board,'O',9)
 
 
 
