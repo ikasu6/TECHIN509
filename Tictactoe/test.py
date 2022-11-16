@@ -21,8 +21,14 @@ class TestTicTactoeBoard(unittest.TestCase):
 
     def test_check_nowin(self):
         board=[['O','X','X'], ['X','O','6'], ['7','O','9']]
-        self.assertEqual(check_winner(board,'O'), None, "Nobody wins Yet ")     
-         
+        self.assertEqual(check_winner(board,'O'), None, "Nobody wins Yet ") 
+
+    def test_check_draw(self):
+        board=[['O','X','X'], ['X','O','O'], ['X','O','X']]
+        self.assertEqual(check_winner(board,'O'), None, "Should be a draw")  
+
+       
+
 
 
 # run the test
