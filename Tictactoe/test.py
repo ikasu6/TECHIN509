@@ -27,6 +27,11 @@ class TestTicTactoeBoard(unittest.TestCase):
         board=[['O','X','X'], ['X','O','O'], ['X','O','X']]
         self.assertEqual(check_winner(board,'O'), None, "Should be a draw")  
 
+    def test_check_display(self):
+        board= [[1,2,3],[4,5,6],[7,8,9]]
+        self.assertEqual(make_empty_board(), board, "board with positions should be returned")  
+        
+
        
 
 

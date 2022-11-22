@@ -1,18 +1,20 @@
 # This file is where game logic lives. No input
 # or output happens here. The logic in this file
 # should be unit-testable.
+
 from termcolor import colored, cprint
 import time
 import random
-def DisplayBoard(board):
+
+def DisplayBoard(board: list)-> None: 
     
     cprint("*TICTACTOE BOARD*",'magenta')
     time.sleep(1)
     print("                    ")
-    for i in board:
+    for x in board:
         st='|'
-        for j in i:
-            st= st+ str(j) +'|'  
+        for y in x:
+            st= st+ str(y) +'|'  
         cprint(st,'blue')
         cprint("--------",'blue') 
 
@@ -21,34 +23,32 @@ def DisplayBoard(board):
 
 
 
-def make_empty_board():
+def make_empty_board():#can Unit test
     board= [ [1,2,3],[4,5,6],[7,8,9]]
     return board
 
 
-def play(board,pos,p):
-        #print(type(pos1))
+def play(board: list,pos: int,p: str)->None:
+        
         for row in board:
-            #print(row)
+            
             ind1=board.index(row)
-            #print(ind1)
+            
             if pos in row:
-                #("true")
+               
                 ind2 = row.index(pos)
-                #print(ind2)
+
                 board[ind1][ind2]=p
                 break
-        #print(board)    
+    
         DisplayBoard(board)
 
 
-def check_winner(board,P):
+def check_winner(board: int,P: str)-> str :
     """Determines the winner of the given board.
     Returns 'X', 'O', or None."""
     #X coordinates
     Win= None
-
-    
     for row in range(0,3):
        if board[row][0]== P and board[row][1]== P and board[row][2]== P:
             Win=P
@@ -83,14 +83,14 @@ def check_winner(board,P):
     return Win 
 
 
-def P1vsP2(board,P1, P2) :
+def P1vsP2(board: list,P1: str, P2: str)->str :
     winner = None
     count=1
     pos1=0
     pos2=0
     li_pos=[1,2,3,4,5,6,7,8,9]
     no_pos=0
-    #print(len(li_pos)==0)
+    
     while winner == None and no_pos==0:
         try:
             pos1=int(input("player 1 enter Position:   "))
@@ -101,11 +101,7 @@ def P1vsP2(board,P1, P2) :
         while pos1 not in li_pos:
             pos1=int(input("Position not available player 1 enter Position on board  "))
 
-        
-        
-
-        #print(li_pos)
-        #########    
+    
         play(board,pos1,P1)
         count=count+1
         i = li_pos.index(pos1)
@@ -129,8 +125,7 @@ def P1vsP2(board,P1, P2) :
             pos2=int(input("Position not available player 2 enter Position on board  "))
 
         
-        #print(li_pos)
-        #########  
+         
         play(board, pos2,P2)
         i = li_pos.index(pos2)
         del li_pos[i]
@@ -144,7 +139,7 @@ def P1vsP2(board,P1, P2) :
             print("Player2 '" +P2 +"' wins yayy")
             winner=P2
             break
-        #print("this is count",count) 
+        
         
     if winner == None:
         print("No winner draw")
@@ -156,7 +151,7 @@ def P1vsP2(board,P1, P2) :
 
 
 
-def P1vsBot(board,P1, P2) :
+def P1vsBot(board: list,P1: str, P2: str)-> str:
     winner = None
     count=1
     pos1=0
@@ -174,10 +169,7 @@ def P1vsBot(board,P1, P2) :
         while pos1 not in li_pos:
             pos1=int(input("Position not available player 1 enter Position on board  "))
 
-    
-
-        #print(li_pos)
-        #########    
+        
         play(board,pos1,P1)
         count=count+1
         i = li_pos.index(pos1)
@@ -192,17 +184,14 @@ def P1vsBot(board,P1, P2) :
             winner=P1
             break
         
-        
-        # using random.choice() to
-        # get a random number
+
         pos2 = random.choice(li_pos)
         # printing random number
         print("Bot's choice of position is :    " + str(pos2))
         time.sleep(1) 
 
 
-        #print(li_pos)
-        #########  
+  
         play(board, pos2,P2)
         i = li_pos.index(pos2)
         del li_pos[i]
@@ -216,7 +205,7 @@ def P1vsBot(board,P1, P2) :
             print("Bot'" +P2 +"' wins yayy")
             winner=P2
             break
-        #print("this is count",count) 
+ 
         
     if winner == None:
         print("No winner draw")
@@ -225,11 +214,64 @@ def P1vsBot(board,P1, P2) :
     
         return winner
 
-#board=make_empty_board()
-#win=P1vsBot(board,'X','O')
 
-board=[['O','O','O'], ['X','5','O'], ['X','O','9']]
-play(board,'O',9)
+
+class player1:
+    
+    def __init__(self, P1: str, Mode: int)-> None:
+        self.Mode=Mode
+        self.P1 = P1
+        self.assign()
+            
+        
+    def assign(self):
+        self.Title='Player1'
+        #print(self.Mode,self.P1,self.Title)
+        return (self.P1,self.Mode,self.Title)
+
+
+
+class player2:
+    
+    def __init__(self, P1: str, Mode: int)-> None:
+        self.Mode=Mode
+        self.P1 = P1
+        self.assign()
+            
+        
+    def assign(self):
+
+
+
+        if self.Mode==1:
+            cprint("Single Player Game",'red')
+            cprint("Player1 Vs Bot",'cyan')
+
+            self.Title= "Bot"
+            if self.P1=='X':
+                    self.P2 ='O'
+                    print("Player1:  ",self.P1 )
+                    print("Bot:      ",self.P2 )
+            elif self.P1=='O' :
+                    self.P2='X'
+                    print("Player1:  ",self.P1 ) 
+                    print("Bot:      ",self.P2 )
+                    print(self.Mode,self.P2,self.Title)
+                
+        if self.Mode==2:
+            cprint("Double Player Game",'red')
+            cprint("Player1 Vs Player2",'cyan')
+            self.Title= "Player2"
+            if self.P1=='X':
+                self.P2='O'
+                print("Player1:  ",self.P1 )
+                print("Player2:  ",self.P2 )
+            elif self.P1=='O' :
+                self.P2='X'
+                print("Player1:  ",self.P1 ) 
+                print("Player2:  ",self.P2 )
+                
+        return (self.P2,self.Mode,self.Title) 
 
 
 
