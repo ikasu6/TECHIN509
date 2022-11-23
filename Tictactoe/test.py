@@ -1,9 +1,7 @@
 import unittest
 from logic import make_empty_board, check_winner,get_positions_onboard
 
-board=[['O','O','O'], ['X',5,'O'], ['X','O','X']]
-win=check_winner(board,'O')
-print(win)
+
 
 # The test based on unittest module
 class TestTicTactoeBoard(unittest.TestCase):
