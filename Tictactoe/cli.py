@@ -3,8 +3,8 @@
 # For core game logic, see logic.py.
 import time
 from termcolor import colored, cprint
-from logic import make_empty_board, DisplayBoard, check_winner,play,P1vsP2,P1vsBot
-from logic import player1, player2
+from logic import make_empty_board, DisplayBoard,Bot,person,play, get_positions_onboard, check_winner
+
 
 
 
@@ -22,12 +22,17 @@ if __name__ == '__main__':
     DisplayBoard(board)
     print("               ")
 
-    #getting input
-    Mode=0
+    #Initiation
+    Mode= None
     P1='N'
-    while Mode!=1 and Mode!=2:
+    winner=None
+    li=[1,2,3,4,5,6,7,8,9]
+    sym=['X','O']
+    mode_list=[1,2,3]
+    while Mode not in mode_list:
         cprint("Press 1 for Single player mode","yellow")
         cprint("Press 2 for Double player mode","yellow")
+        cprint("Press 3 for Bot Double player mode","yellow")
         try:
             Mode= int(input("Enter: "))
         except:
@@ -37,22 +42,63 @@ if __name__ == '__main__':
 
     while P1 != 'O' and P1 !='X':
         try:
-            P1=input("Player1 select your symbol X or O: ")
+            P1=input("Select symbol for Player 1 'X' or 'O' : ")
             P1=P1.upper()
+            if P1==sym[0]:#X
+                P2='O'
+            else:
+                P2='X'    
+
         except:
             cprint("Enter Valid details",'red')     
             
+    ##Defining Mode
+    
+    if Mode==1:
+        #This is single player mode 
+        player1= person(P1,1)
+        player2= Bot(P2,2)
+
+    if Mode==2:
+        #This is  Double player mode
+        player1= person(P1,1)
+        player2= person(P2,2)    
+
+    if Mode==3:
+        #This is  Bot Double player mode
+        player1= Bot(P1,1)
+        player2= Bot(P2,2)
+        
+    while winner==None:
+            print("Printing length of li",li)
+            if len(li)!=0:
+                (pos1,ln)=player1.get_position(li)
+                li=ln
+                board_updated=get_positions_onboard(board,pos1,P1)
+                winner=check_winner(board_updated,P1)
+                if winner==player1.Sym:
+                    cprint(player1.Title +"  '"+player1.Sym+ "' won the game",'magenta') 
+                    break
+ 
+              
+            print("Printing length of li",li)
+            if len(li)!=0:
+                (pos2,ln)=player2.get_position(li)
+                li=ln
+                board_updated=get_positions_onboard(board,pos2,P2)
+                winner=check_winner(board_updated,P2)
+
+                if winner == player2.Sym:
+                        cprint(player2.Title +"  '"+player2.Sym+ "' won the game",'magenta')  
+                        break
 
 
-    Player1=player1(P1,Mode)
-    Player2=player2(Player1.P1,Player1.Mode)# dependency Injection
-    P2=Player2.P2
+       
+            if len(li)==0 and winner==None:
+                cprint("DRAW no one won the game",'magenta')
+                  
+
+
     
     
-if Mode==1:
-    winner=P1vsBot(board,P1, P2)
-    #print(winner)
-    pass
-if Mode==2:
-    winner=P1vsP2(board,P1, P2)
-    #print(winner)
+    
