@@ -16,7 +16,8 @@ class Bot:
     def assign(self):   
         self.Title= input("Enter a name for bot player"+str(self.Pn)+" :  ")
         cprint(self.Title+" : '"+self.Sym+"'",'green')
-    
+        self.GS=None
+        self.positions=[]
         return (self.Sym,self.Title) 
 
     def get_position(self,li_pos:list)->int: 
@@ -28,6 +29,10 @@ class Bot:
         del self.li_pos[self.i]
         time.sleep(1)
         return (self.pos ,self.li_pos) 
+
+    def properties(self):
+        self.prop={'Name':self.Title,'Moves':self.positions,'Status':self.GS,'Symbol':self.Sym,'Type':'Bot'}  
+        return(self.prop) 
 
 
 
@@ -43,6 +48,8 @@ class person:
     def assign(self):
         self.Title=input(" Please Enter your name "+"Player"+str(self.Pn)+":  ")
         cprint(self.Title+" : '"+self.Sym+"'",'green')
+        self.GS=None
+        self.positions=[]
         return (self.Sym,self.Title) 
    
 
@@ -66,6 +73,10 @@ class person:
         #DisplayBoard(self.li_pos)    
 
         return (self.pos ,self.li_pos) 
+
+    def properties(self):
+        self.prop={'Name':self.Title,'Moves':self.positions,'Status':self.GS,'Symbol':self.Sym, 'Type':'Bot'} 
+        return(self.prop)    
 
 
 

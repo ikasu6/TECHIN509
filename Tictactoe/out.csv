@@ -1,0 +1,10 @@
+,Player1Name,Player1Moves,Player1Status,Player1Symbol,Player1Type,Player2Name,Player2Moves,Player2Status,Player2Symbol,Player2Type,GameID
+0,ytfgd,"[8, 9, 3, 2]",NoWin,X,Bot,asdd,"[4, 6, 1, 7]",Win,O,Bot,1
+1,hij,"[5, 2, 1, 8]",Win,X,Bot,ffd,"[6, 9, 4]",NoWin,O,Bot,2
+2,asdfg,"[4, 6, 9, 3]",Win,X,Bot,lkjh,"[7, 2, 5]",NoWin,O,Bot,3
+3,Haely,"[4, 7, 8, 3, 1]",Win,X,Bot,winnie,"[6, 5, 9, 2]",NoWin,O,Person,4
+4,Haely,"[8, 5, 7, 3]",Win,X,Bot,Winnie,"[9, 4, 6]",NoWin,O,Person,5
+5,Winnie,"[1, 7, 3, 8]",NoWin,O,Bot,Amelia,"[4, 6, 9, 5]",Win,X,Person,6
+6,Winnie,"[6, 3, 9]",Win,X,Bot,Amelia,"[5, 2]",NoWin,O,Person,7
+7,Amelia,"[5, 8, 3, 4, 1]",Draw,O,Bot,Haely,"[7, 2, 6, 9]",Draw,X,Person,8
+8,Amelia,"[3, 8, 6, 4, 1]",Draw,X,Bot,Haely,"[2, 5, 7, 9]",Draw,O,Person,9
