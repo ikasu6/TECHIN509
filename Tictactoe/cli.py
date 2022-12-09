@@ -16,6 +16,39 @@ if __name__ == '__main__':
     GameName= "**********TicTacToe Game***********"
     cprint(GameName, "green")
     time.sleep(1)
+    #printing top player
+
+    def winnerboard(filename):
+        games_data=pd.read_csv(filename,index_col=[0])
+        li2=games_data.PlayerName[games_data['PlayerStatus']=='Win'] 
+        li2=list(li2)
+        Player_won_max=max(li2,key=li2.count)
+        No_of_times_won=li2.count(Player_won_max)
+        No_of_games_Played=len(games_data[games_data['PlayerName']==Player_won_max] )
+        df2=games_data.explode('PlayerName')
+        #print(df2)
+        res = pd.crosstab(df2['PlayerName'], df2['PlayerStatus'])
+        #print(res)
+        res['GamesPlayed']=res['Draw'] + res['NoWin'] + res['Win'] 
+        
+            
+        res=res[['GamesPlayed', 'Draw', 'NoWin', 'Win']]
+        res.columns.name = None
+        return res
+
+    res=winnerboard('out.csv') 
+    res=res.sort_values('Win',ascending=False)
+    res.reset_index(inplace=True)
+    #res['Rank']=[x+1 for x in list(res.index)]
+    rankboard=res.head(4).to_string(index=False)
+
+    cprint("_____________________________________________________________________________","red")
+    cprint("            *******************Our Top Players*********************          ", "red")
+    cprint(rankboard,"red")
+    cprint("-----------------------------------------------------------------------------","red")
+
+
+
     board = make_empty_board()
     print("               ")
     DisplayBoard(board)
@@ -113,18 +146,15 @@ if __name__ == '__main__':
                 break
 
 
-    print(player1.properties())  
-    print(player2.properties()) 
+    #print(player1.properties())  
+    #print(player2.properties()) 
     l=[]
     finaldict={}
     for i in player1.properties():
-     newkey='Player1'+i
-     finaldict[newkey]=player1.properties()[i]
+     newkey='Player'+i
+     finaldict[newkey]=[player1.properties()[i],player2.properties()[i]]
 
-    for i in player2.properties():
-     newkey='Player2'+i
-     finaldict[newkey]=player2.properties()[i]
-    #Sprint(finaldict)
+    
 
 
 
@@ -132,16 +162,20 @@ if __name__ == '__main__':
 
     try:
         games_data=pd.read_csv('out.csv',index_col=[0])
-        print(games_data.columns)
-        print(len(games_data.columns))
+        #print(games_data.columns)
+        #print(len(games_data.columns))
         GID=list(games_data["GameID"])
-        finaldict["GameID"]=GID[-1]+1
-        columns1=["Player1Name","Player1Moves","Player1Status","Player1Symbol","Player1Type" ,"Player2Name","Player2Moves","Player2Status","Player2Symbol","Player2Type","GameID",]
-        li=[]
-        for i in finaldict:
-           a= finaldict[i]
-           li.append(a)
-        games_data.loc[len(games_data.index)] = li
+        finaldict["GameID"]=[GID[-1]+1,GID[-1]+1]
+        columns1=["PlayerName","PlayerMoves","PlayerStatus","PlayerSymbol","PlayerType" ,"GameID"]
+        for k in range(2):
+            li=[]
+            for i in finaldict:
+                a= finaldict[i][k]
+                li.append(a)
+                #print("fgshjehjrkjrkdjf,,h")
+                
+            #print(li)
+            games_data.loc[len(games_data.index)] = li
         games_data.to_csv('out.csv')
 
 
@@ -149,8 +183,8 @@ if __name__ == '__main__':
         
     except FileNotFoundError:
         
-        columns1=["Player1Name","Player1Moves","Player1Status","Player1Symbol" ,"Player1Type","Player2Name","Player2Moves","Player2Status","Player2Symbol","Player2Type","GameID",]
-        finaldict["GameID"]=1
+        columns1=["PlayerName","PlayerMoves","PlayerStatus","PlayerSymbol","PlayerType" ,"GameID"]
+        finaldict["GameID"]=[1,1]
         li=[]
         for i in finaldict:
            a= finaldict[i]
@@ -159,9 +193,28 @@ if __name__ == '__main__':
         data_df = data_df.transpose()
         data_df.columns = columns1
         #print(data_df.head())
-        data_df.set_index('GameID')
+        #data_df.set_index('GameID')
         #print(data_df)
         data_df.to_csv('out.csv')
+
+    res=winnerboard('out.csv') 
+    res=res.sort_values('Win',ascending=False)
+    res.reset_index(inplace=True)
+    #res['Rank']=[x+1 for x in list(res.index)]
+    rankboard=res.head(4).to_string(index=False)
+    P1data=res.loc[res['PlayerName'] == player1.Title]
+    P1data=P1data.to_string(index=False)
+    cprint("Great Game !!!",'yellow')
+    cprint("_______________________________", 'green')
+    cprint(player1.Title+" your details",'green')
+    cprint(P1data,'green')
+    P2data=res.loc[res['PlayerName'] == player2.Title]
+    P2data=P2data.to_string(index=False)
+    cprint("_______________________________", 'green')
+    cprint(player2.Title+"  your details",'green')
+    cprint(P2data,'green')
+
+    
 
 
 
