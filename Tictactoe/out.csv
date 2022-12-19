@@ -33,3 +33,9 @@
 31,Amelia,"[5, 8, 2]",Win,X,Bot,16
 32,Winnie,"[9, 8, 3, 6]",Win,O,Bot,17
 33,Haely,"[2, 5, 7]",NoWin,X,Bot,17
+34,healy,"[5, 9, 1]",Win,X,Bot,18
+35,bot1,"[7, 3]",NoWin,O,Bot,18
+36,Haely,"[7, 3, 6, 9]",Win,X,Bot,19
+37,Winnie,"[4, 8, 5]",NoWin,O,Bot,19
+38,Amelia,"[8, 1, 3, 9, 6]",Win,X,Bot,20
+39,Winnie,"[2, 7, 5, 4]",NoWin,O,Bot,20
