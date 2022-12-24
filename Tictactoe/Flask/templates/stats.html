@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>TicTacToe</title>
+    <meta charset="utf-8">
+	<meta name="author" content="AnikeSadia">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1,user-scalable=no">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha384-rY/jv8mMhqDabXSo+UCggqKtdmBfd3qC2/KvyTDNQ6PcUJXaxK1tMepoQda4g5vB" crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="static/AppStyle.css">
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+    </script>
+    
+   {% block head %}
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+          // Define the chart to be drawn.
+          var data = new google.visualization.arrayToDataTable([
+             {% for k, v in data.items() %}
+                {% if v is string %}
+                  ['{{ k }}', '{{ v }}'],
+                {% else %}
+                  ['{{ k }}', {{ v }}],
+                {% endif %}
+             {% endfor %}
+          ]);
+
+
+          // Instantiate and draw the chart.
+          var chart = new google.visualization.ColumnChart(document.getElementById('myPieChart'));
+          chart.draw(data, null);
+        }
+      </script>
+    {% endblock %}
+
+
+</head>
+<body>
+	
+	<h2>________________________*****Player1 Details*****__________________________</h2>
+	<br>
+	<h3>{{msg1}}</h3>
+
+
+	<h2>________________________*****Player2 Details*****__________________________</h2>
+	<br>
+	<h3>{{msg2}}</h3>
+
+
+	<title>Top Players Board</title>
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+	<div class=page>
+	  <h1>Top Players</h1>
+	  {% for table in tables %}
+	
+		{{ table|safe }}
+	  {% endfor %}
+	</div>
+    
+	{% block body %}
+    <!-- Identify where the chart should be drawn. -->
+    <div id="myPieChart"></div>
+    {% endblock %}
+	
+
+
+
+</body>
+
+  

@@ -39,3 +39,25 @@
 37,Winnie,"[4, 8, 5]",NoWin,O,Bot,19
 38,Amelia,"[8, 1, 3, 9, 6]",Win,X,Bot,20
 39,Winnie,"[2, 7, 5, 4]",NoWin,O,Bot,20
+40,Kasu,"[1, 5, 2, 9]",Win,O,Bot,21
+41,Bot1,"[4, 3, 6]",NoWin,X,Bot,21
+42,Kasu,"[2, 5, 8]",Win,X,Bot,22
+43,Ish,"[3, 7]",NoWin,O,Bot,22
+44,bot1,"[5, 3, 1, 9]",Win,O,Bot,23
+45,bot2,"[6, 8, 2]",NoWin,X,Bot,23
+46,Kasu,"[2, 4, 7, 1]",Win,O,Bot,24
+47,Bot1,"[6, 9, 8]",NoWin,X,Bot,24
+48,Kasu,"[2, 4, 5]",NoWin,X,Bot,25
+49,Ish,"[3, 6, 9]",Win,O,Bot,25
+50,Bot1,"[1, 2, 8, 6]",NoWin,X,Bot,26
+51,Bot2,"[5, 4, 7, 3]",Win,O,Bot,26
+52,Kasu,"[2, 5, 8]",Win,X,Bot,27
+53,Bot1,"[3, 1]",NoWin,O,Bot,27
+54,Kasu,"[2, 4, 1]",NoWin,O,Bot,28
+55,Lin,"[3, 6, 9]",Win,X,Bot,28
+56,Bot1,"[1, 6, 9, 8, 5]",Win,X,Bot,29
+57,Bot2,"[2, 4, 3, 7]",NoWin,O,Bot,29
+58,hg,"[2, 9, 3, 4, 7]",Draw,X,Bot,30
+59,iuy,"[6, 5, 8, 1]",Draw,O,Bot,30
+60,k,"[4, 1, 6, 5]",Win,X,Bot,31
+61,n,"[8, 2, 9]",NoWin,O,Bot,31

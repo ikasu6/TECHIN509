@@ -3,7 +3,7 @@
 # For core game logic, see logic.py.
 import time
 from termcolor import colored, cprint
-from logic import make_empty_board, DisplayBoard,Bot,person, get_positions_onboard, check_winner
+from logic import Game,Bot,person
 import pandas as pd
 
 
@@ -49,14 +49,9 @@ if __name__ == '__main__':
 
 
 
-    board = make_empty_board()
-    print("               ")
-    DisplayBoard(board)
-    print("               ")
-    ###storing Variables#############
+ 
 
     ###############################3
-
     #Initiation
     Mode= None
     P1='N'
@@ -93,6 +88,7 @@ if __name__ == '__main__':
         #This is single player mode 
         player1= person(P1,1)
         player2= Bot(P2,2)
+        
 
     if Mode==2:
         #This is  Double player mode
@@ -103,17 +99,22 @@ if __name__ == '__main__':
         #This is  Bot Double player mode
         player1= Bot(P1,1)
         player2= Bot(P2,2)
-
-
         
+
+
+    TTT=Game(player1,player2)
+    board=TTT.Board
+    
     while winner==None:
             #print("Printing length of li",li)
             if len(li)!=0:
                 (pos1,ln)=player1.get_position(li)
+                print("_____________________")
+                print(pos1,ln)
                 li=ln
                 player1.positions.append(pos1)
-                board_updated=get_positions_onboard(board,pos1,P1)
-                winner=check_winner(board_updated,P1)
+                board_updated=TTT.get_positions_onboard(board,pos1,P1)
+                winner=TTT.check_winner(board_updated,P1)
                 if winner==player1.Sym:
                     cprint(player1.Title +"  '"+player1.Sym+ "' won the game",'magenta') 
                     player1.GS='Win'
@@ -126,8 +127,8 @@ if __name__ == '__main__':
                 (pos2,ln)=player2.get_position(li)
                 li=ln
                 player2.positions.append(pos2)
-                board_updated=get_positions_onboard(board,pos2,P2)
-                winner=check_winner(board_updated,P2)
+                board_updated=TTT.get_positions_onboard(board,pos2,P2)
+                winner=TTT.check_winner(board_updated,P2)
 
                 if winner == player2.Sym:
                         cprint(player2.Title +"  '"+player2.Sym+ "' won the game",'magenta')
